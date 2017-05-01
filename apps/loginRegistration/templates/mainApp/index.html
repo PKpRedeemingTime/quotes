@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>Login/Registration</title>
+        <meta charset='UTF-8'>
+    </head>
+    <body>
+        <h3>Welcome!</h3>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{message}}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <fieldset style="display:inline;">
+            <legend>Login</legend>
+            <form action="{% url "home:login" %}", method='POST'>
+            {% csrf_token %}
+            <label style="display:block;" for="client_alias">Alias: <input type="text" name="client_alias" id="client_alias"></label>
+            <label  style="display:block;" for="client_password">Password: <input type="password" name="client_password" id="client_password"></label>
+            <input  style="display:block;" type="submit" name="submit" value="Login">
+        </form>
+        </fieldset>
+        <fieldset  style="display:inline;">
+            <legend>Register</legend>
+            <form action="{% url "home:register" %}", method='POST'>
+            {% csrf_token %}
+            <label  style="display:block;" for="name">Name: <input type="text" name="name" id="name"></label>
+            <label  style="display:block;" for="alias">Alias: <input type="text" name="alias" id="alias"></label>
+            <label  style="display:block;" for="email">Email Address: <input type="text" name="email" id="email"></label>
+            <label  style="display:block;" for="password">Password: <input type="password" name="password" id="password"></label>
+            <p>*Password should be at least 8 characters</p>
+            <label  style="display:block;" for="confirm_password">Confirm Password: <input type="password" name="confirm_password" id="confirm_password"></label>
+            <label  style="display:block;" for="birthday">Date of Birth: <input type="date" name="birthday" id="birthday"></label>
+            <input type="submit" name="submit" value="Register">
+        </form>
+        </fieldset>
+    </body>
+</html>

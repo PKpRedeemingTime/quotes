@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>{{client.alias}}</title>
+        <meta charset='UTF-8'>
+    </head>
+    <body>
+        <a href="{% url "home:friends" %}">Home</a>
+        <a href="{% url "home:index" %}">Logout</a>
+        <h3>{{client.alias}}'s Profile</h3>
+        <p>Name: {{client.name}}</p>
+        <p>Email Address: {{client.email}}</p>
+    </body>
+</html>

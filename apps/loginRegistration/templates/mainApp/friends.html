@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <title>Friends</title>
+        <meta charset='UTF-8'>
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border: 1px solid black;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+    </head>
+    <body>
+        <h3 style="display:inline">Hello, {{name.alias}}! </h3>
+        <a href="{% url "home:index" %}">Logout</a>
+        <p>Here is the list of your friends:</p>
+        {% if count == 0 %}
+            <h4>You have not yet added any friends to your list...</h4>
+        {% else %}
+            <table>
+                <tr style="background-color:grey">
+                    <th style="border-right:1px solid black">Alias</th>
+                    <th style="text-align:center">Action</th>
+                </tr>
+                {% for friend in friends %}
+                    <tr>
+                        <td style="border-right:1px solid black">{{friend.alias}}</td>
+                        <td><a href="{% url 'home:users' friend.id %}">View Profile</a> <a href="{% url 'home:remove' friend.id %}">Remove as Friend</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        <p>Other users not on your friend's list:</p>
+            <table>
+                <tr style="background-color:grey">
+                    <th style="border-right:1px solid black">Alias</th>
+                    <th style="text-align:center">Action</th>
+                </tr>
+                {% for other in others %}
+                <form action="{% url 'home:add' id=other.id %}"> 
+                    {% csrf_token %}
+                    <tr>
+                        <td style="border-right:1px solid black"><a href="{% url 'home:users' other.id %}">{{other.alias}}</a></td>
+                        <td><input type="submit" name="" value="Add as Friend"></td>
+                    </tr>
+                    </form>
+                {% endfor %}
+            </table>
+        </form> 
+    </body>
+</html>
